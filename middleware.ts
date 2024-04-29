@@ -9,10 +9,7 @@ import {
 
 const { auth } = NextAuth(authConfig)
 
-export default auth((req): any => {
-  //   console.log("ROUTE:", req.nextUrl.pathname)
-  //   console.log("IS LOGGEDIN:", isLoggedIn)
-
+const auth = (req) => {
   const { nextUrl } = req
   const isLoggedIn = !!req.auth
 
@@ -31,12 +28,14 @@ export default auth((req): any => {
     return null
   }
 
-  if (!isLoggedIn && isPublicRoute) {
+  if (!isLoggedIn && !isPublicRoute) {
     return Response.redirect(new URL("/auth/login", nextUrl))
   }
 
   return null
-})
+}
+
+export default auth
 
 export const config = {
   matcher: ["/((?!.+\\.[\\w]+$|_next).*)", "/", "/(api/trpc)(.*)"],
