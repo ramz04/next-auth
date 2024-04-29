@@ -1,5 +1,5 @@
-import authConfig from "@/auth.config"
 import NextAuth from "next-auth"
+import authConfig from "@/auth.config"
 import {
   DEFAULT_LOGIN_REDIRECT,
   apiAuthPrefix,
@@ -9,7 +9,7 @@ import {
 
 const { auth } = NextAuth(authConfig)
 
-const auth = (req) => {
+export default auth((req): any => {
   const { nextUrl } = req
   const isLoggedIn = !!req.auth
 
@@ -33,10 +33,8 @@ const auth = (req) => {
   }
 
   return null
-}
-
-export default auth
+})
 
 export const config = {
-  matcher: ["/((?!.+\\.[\\w]+$|_next).*)", "/", "/(api/trpc)(.*)"],
+  matcher: ["/((?!.+\\.[\\w]+$|_next).*)", "/", "/(api|trpc)(.*)"],
 }
