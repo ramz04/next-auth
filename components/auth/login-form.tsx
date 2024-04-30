@@ -6,6 +6,7 @@ import { LoginSchema } from "@/schemas"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { login } from "@/actions/login"
 import * as z from "zod"
+import { LucideLoader2 } from "lucide-react"
 
 import {
   Form,
@@ -93,7 +94,12 @@ export const LoginForm = () => {
             />
             <FormError message={error} />
             <FormSuccess message={success} />
-            <Button type="submit" disabled={isPending} className="w-full">
+            <Button type="submit" disabled={isPending} className="w-full gap-2">
+              {isPending ? (
+                <LucideLoader2 className="animate-spin size-5" />
+              ) : (
+                ""
+              )}
               Login
             </Button>
           </div>

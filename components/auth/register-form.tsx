@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form"
 import { CardWrapper } from "./card-wrapper"
 import { RegisterSchema } from "@/schemas"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { LucideLoader2 } from "lucide-react"
 import * as z from "zod"
 
 import {
@@ -110,7 +111,12 @@ export const RegisterForm = () => {
             />
             <FormError message={error} />
             <FormSuccess message={success} />
-            <Button type="submit" disabled={isPending} className="w-full">
+            <Button type="submit" disabled={isPending} className="w-full gap-2">
+              {isPending ? (
+                <LucideLoader2 className="animate-spin size-5" />
+              ) : (
+                ""
+              )}
               Create an account
             </Button>
           </div>
