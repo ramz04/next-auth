@@ -21,8 +21,15 @@ import { Button } from "../ui/button"
 import { FormError } from "../form-error"
 import { FormSuccess } from "../form-success"
 import { useState, useTransition } from "react"
+import { useSearchParams } from "next/navigation"
 
 export const LoginForm = () => {
+  const searchParams = useSearchParams()
+  const urlError =
+    searchParams.get("error") === "OAuthAccountNotLinked"
+      ? "Email already in use with different provider"
+      : ""
+
   const form = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
     defaultValues: {
@@ -40,8 +47,8 @@ export const LoginForm = () => {
     setSuccess("")
     startTransition(() => {
       login(values).then((data) => {
-        setError(data.error)
-        setSuccess(data.success)
+        setError(data?.error)
+        setSuccess(data?.success)
       })
     })
   }
@@ -92,7 +99,7 @@ export const LoginForm = () => {
                 </FormItem>
               )}
             />
-            <FormError message={error} />
+            <FormError message={error || urlError} />
             <FormSuccess message={success} />
             <Button type="submit" disabled={isPending} className="w-full gap-2">
               {isPending ? (
