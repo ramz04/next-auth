@@ -22,6 +22,7 @@ import { FormError } from "../form-error"
 import { FormSuccess } from "../form-success"
 import { useSearchParams } from "next/navigation"
 import { newPassword } from "@/actions/new-password"
+import { PasswordInput } from "../ui/password-input"
 
 export const NewPasswordForm = () => {
   const searchParams = useSearchParams()
@@ -65,7 +66,7 @@ export const NewPasswordForm = () => {
                 <FormItem>
                   <FormLabel>Password</FormLabel>
                   <FormControl>
-                    <Input
+                    <PasswordInput
                       {...field}
                       disabled={isPending}
                       placeholder="Enter new password"

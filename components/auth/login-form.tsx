@@ -7,7 +7,6 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { login } from "@/actions/login"
 import * as z from "zod"
 import { LucideLoader2 } from "lucide-react"
-
 import {
   Form,
   FormControl,
@@ -23,6 +22,7 @@ import { FormSuccess } from "../form-success"
 import { useState, useTransition } from "react"
 import { useSearchParams } from "next/navigation"
 import Link from "next/link"
+import { PasswordInput } from "../ui/password-input"
 
 export const LoginForm = () => {
   const searchParams = useSearchParams()
@@ -89,7 +89,7 @@ export const LoginForm = () => {
                 <FormItem>
                   <FormLabel>Password</FormLabel>
                   <FormControl>
-                    <Input
+                    <PasswordInput
                       {...field}
                       disabled={isPending}
                       placeholder="******"

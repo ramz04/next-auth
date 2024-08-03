@@ -21,6 +21,7 @@ import { FormError } from "../form-error"
 import { FormSuccess } from "../form-success"
 import { useState, useTransition } from "react"
 import { register } from "@/actions/register"
+import { PasswordInput } from "../ui/password-input"
 
 export const RegisterForm = () => {
   const form = useForm<z.infer<typeof RegisterSchema>>({
@@ -98,7 +99,7 @@ export const RegisterForm = () => {
                 <FormItem>
                   <FormLabel>Password</FormLabel>
                   <FormControl>
-                    <Input
+                    <PasswordInput
                       {...field}
                       disabled={isPending}
                       placeholder="******"
